@@ -5,12 +5,10 @@ from flask import Blueprint, jsonify, abort, make_response, request
 books_bp = Blueprint("books_bp", __name__, url_prefix="/books")
 
 @books_bp.route("", methods=['Post'])
-def get_all_books():
+def handle_books():
     request_body = request.get_json()
     new_book = Book(title=request_body['title'],
-                    author=request_body['author'],
-                    year_published=request_body['year_published'],
-                    descrtiption=request_body['description'])
+                    description=request_body['description'])
 
     db.session.add(new_book)
     db.session.commit()
