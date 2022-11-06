@@ -18,7 +18,6 @@ class Book(db.Model):
         new_book=Book(title=book_data['title'], description=book_data['description'])
         return new_book
         
-
     @classmethod
     def create_class_instance_using_cls(cls):
         return cls
