@@ -20,8 +20,7 @@ def validate_book(book_id):
 @books_bp.route("", methods=["POST"])
 def create_book():
     request_body = request.get_json()
-    new_book = Book(title=request_body["title"],
-                    description=request_body["description"])
+    new_book = Book.from_dict(request_body)
 
     db.session.add(new_book)
     db.session.commit()
@@ -59,6 +58,7 @@ def update_book(book_id):
     db.session.commit()
 
     return make_response(jsonify(f"Book #{book.id} successfully updated"))
+
 
 @books_bp.route("/<book_id>", methods=["DELETE"])
 def delete_book(book_id):
