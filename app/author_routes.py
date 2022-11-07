@@ -20,7 +20,7 @@ def validate_model(cls, model_id):
 @authors_bp.route("", methods=["POST"])
 def create_author():
     request_body = request.get_json()
-    new_author = Author(name=request_body["name"],)#.from_dict(request_body)
+    new_author = Author.from_dict(request_body)
 
     db.session.add(new_author)
     db.session.commit()
@@ -37,7 +37,7 @@ def read_all_authors():
 
     authors_response = []
     for author in authors:
-        authors_response.append({"name": author.name}) #(Author.to_dict())
+        authors_response.append(author.to_dict())
 
     return jsonify(authors_response)
 
