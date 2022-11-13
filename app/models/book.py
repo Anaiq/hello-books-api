@@ -13,13 +13,18 @@ class Book(db.Model):
         book_as_dict["id"] = self.id
         book_as_dict["title"] = self.title
         book_as_dict["description"] = self.description
-        book_as_dict["author"]= self.author  
-        book_as_dict["author_id"]= self.author_id
+        book_as_dict["author"]= self.author
+        if self.author:
+            book_as_dict["author_id"]= self.author_id
+        if self.genres:
+            genre_names = [genre.name for genre in self.genres]
+            book_as_dict["genres"]= genre_names
 
         return book_as_dict
 
     @classmethod
-    def from_dict(cls, book_data):
-        new_book = Book(title=book_data["title"],
-                        description=book_data["description"])
+    def from_dict(cls, request_body):
+        new_book = Book(title=request_body["title"],
+                        description=request_body["description"],
+                        )
         return new_book

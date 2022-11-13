@@ -10,6 +10,7 @@ class Genre(db.Model):
         genre_as_dict = {}
         genre_as_dict["id"] = self.id
         genre_as_dict["name"] = self.name
+        genre_as_dict["books"] = self.books
 
         return genre_as_dict
 
